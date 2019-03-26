@@ -9,9 +9,13 @@ for (var i = 0; i < elements.length; i++) {
         if (node.nodeType === 3) {
             var text = node.nodeValue;
             var replacedText = text.replace(/fuck/g, "****");
+            var replacedText2 = text.replace(/bitch/g, "****");
 
             if (replacedText !== text) {
                 element.replaceChild(document.createTextNode(replacedText), node);
+            }
+            if (replacedText2 !== text) {
+                element.replaceChild(document.createTextNode(replacedText2), node);
             }
         }
     }
