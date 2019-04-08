@@ -127,6 +127,8 @@ class SourceChecker(object):
 
 		return domains
 
+
+
 	def get_domain(self, full_url):
 		"""function to extract the domain name from the URL"""
 		clean_reg= re.compile(r'^((?:https?:\/\/)?(?:www\.)?).*?(\/.*)?$')
@@ -135,6 +137,8 @@ class SourceChecker(object):
 		domain = string.replace(full_url, beg, '')
 		domain = string.replace(domain, end, '')
 		return domain
+
+
 
 	def render_output(self, domains):
 		"""renders text output"""
@@ -161,6 +165,44 @@ class SourceChecker(object):
 				print '\n'
 
 
+	def render_graph(self, domains):
+		"""renders graph output"""
+		g = Graph()
+		for domain in domains.keys():
+			if domain in self.cat_dict:
+				categories = self.cat_dict[domain]
+				stroke =  (0,0,0,0.5)
+				if 'right' in categories:
+					stroke = (255, 0, 0, 1)
+				elif 'right_center' in categories:
+					stroke = (255, 0, 0, .5)
+				if 'left' in categories:
+					stroke = (0,0,255, 1)
+				elif 'left_center' in categories:
+					stroke = (0,0,255, .5)
+				if 'least_biased' in categories:
+					stroke = (0,255,0, 1)
+
+			fill = (128,128,0, 0.1)
+			dub_cats = ['fake', 'questionable', 'clickbait', 'unreliable', 'conspiracy']
+			score = len([c for c in categories if c in dub_cats])
+			if score:
+				fill = (0,0,0,float(score)/5)			
+			g.add_node(domain, radius = len(domains[domain])*6, stroke = stroke, strokewidth = 6, fill = fill, font_size = 30)
+
+		pairs = self.pairwise(domains.keys())
+		for x, y in pairs:
+			x_queries = set(domains[x])
+			y_queries = set(domains[y])
+			intersection = len(x_queries.intersection(y_queries))
+			if intersection > 0:
+				max_rad = max(len(domains[x]), len(domains[y]))+1000
+				g.add_edge(x, y, length = max_rad, strokewidth = intersection)
+
+		path = 'graph'
+		g.export(path, encoding='utf-8', distance = 6, directed = False, width = 1400, height = 900)
+
+
 def main():
 
 	text = sys.argv[1]
@@ -173,6 +215,7 @@ def main():
 	domains = sc.get_urls(queries)
 	sc.load_domains()
 	sc.render_output(domains)
+	#sc.render_graph(domains)
 
 
 if __name__ == "__main__":

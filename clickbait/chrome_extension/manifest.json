@@ -15,7 +15,7 @@
                 "*://*/*"
             ],
             "js": [
-                "content.js"
+                "content.js","jquery.js"
             ],
             "run_at": "document_end"
         }
