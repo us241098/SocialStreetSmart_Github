@@ -27,7 +27,7 @@ Results from the program
 
 
 
-A simple google search proves that sources of the story were onion, reddit etc. And reddit is a satirical news website and is annotated so in our data set.
+A simple google search proves that sources of the story were onion, reddit etc. And Onion is a satirical news website and is annotated so in our data set.
 
 
 ![alt text](https://raw.githubusercontent.com/us241098/SocialStreetSmart_Github/master/news_origin/Screenshot%20from%202019-03-26%2022-20-55.png)
