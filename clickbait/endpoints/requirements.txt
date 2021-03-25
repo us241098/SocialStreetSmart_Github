@@ -145,7 +145,7 @@ python-pptx==0.6.5
 python-socketio==2.0.0
 pytz==2014.10
 pyxdg==0.25
-PyYAML==3.13
+PyYAML==5.4
 pyzmq==17.0.0
 qtconsole==4.3.1
 ratelim==0.1.6
