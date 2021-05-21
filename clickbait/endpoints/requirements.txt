@@ -179,7 +179,7 @@ tables==3.2.2
 tablib==0.12.1
 telegram==0.0.1
 tensorboard==1.9.0
-tensorflow==1.9.0
+tensorflow==2.5.0
 termcolor==1.1.0
 terminado==0.8.1
 tesseract==0.1.3
